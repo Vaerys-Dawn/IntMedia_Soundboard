@@ -2,7 +2,7 @@
   public sinWave(String soundFile, int id, float offset, float effectWidth) throws IOException{
     super(soundFile, id, offset, effectWidth);
   }
-  public void drawEffect(){
+  public void drawEffect(){  
   background(0);
   fill(color_1);
   posY = 200;

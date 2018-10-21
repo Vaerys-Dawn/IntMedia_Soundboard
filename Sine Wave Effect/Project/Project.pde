@@ -1,3 +1,4 @@
+import processing.sound.*;
 import beads.*;
 import org.jaudiolibs.beads.*;
 import java.util.Arrays; 
@@ -8,6 +9,7 @@ import java.util.Arrays;
   float posX, posY, amplitude = 40, variationY, temps = 0, WaveSpeed, completeCycle, subCycle;
   int startX = 100, endX = 500, step=10, distanceX;
   color color_1, color_2;
+  SoundFile sound;
 
   
   public void setup(){
@@ -25,20 +27,21 @@ import java.util.Arrays;
     try{
       wave = new sinWave("",1,0,100);
     }catch(IOException e){}
-    
-    context = new AudioContext();
-    WavePlayer freqModulator = new WavePlayer(context, 150, Buffer.SINE);
-    Function function = new Function(freqModulator) {
-      public float calculate() {
-        return x[0] * 100.0 + 600.0;
-      }
-    };
+    sound = new SoundFile(this, "sinewave.mp3");
+    sound.play();
+    //context = new AudioContext();
+    //WavePlayer freqModulator = new WavePlayer(context, 150, Buffer.SINE);
+    //Function function = new Function(freqModulator) {
+    //  public float calculate() {
+    //    return x[0] * 100.0 + 600.0;
+    //  }
+    //};
 
-    WavePlayer wp = new WavePlayer(context, function, Buffer.SINE);
-    mainVolume = new Gain(context, 1, 0.2);
-    mainVolume.addInput(wp);
-    context.out.addInput(mainVolume);
-    context.start();
+    //WavePlayer wp = new WavePlayer(context, function, Buffer.SINE);
+    //mainVolume = new Gain(context, 1, 0.2);
+    //mainVolume.addInput(wp);
+    //context.out.addInput(mainVolume);
+    //context.start();
   }
 
 color fore = color(20, 255, 100);
