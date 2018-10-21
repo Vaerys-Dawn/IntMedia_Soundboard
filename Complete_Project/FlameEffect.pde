@@ -11,6 +11,7 @@ public void drawEffect(){
     if (isActive){ps.addParticle();}
     ps.run();
 }
+
 class ParticleSystem {
   ArrayList<Particle> particles;
   PVector origin;
