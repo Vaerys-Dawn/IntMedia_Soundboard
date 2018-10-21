@@ -1,0 +1,10 @@
+enum State {
+    RAIN_FALL,
+    RAIN_HIT,
+    RAIN_RESET,
+
+    BALL_INITIAL_DROP,
+    BALL_SQUISH,
+    BALL_BOUNCE_1,
+    BALL_RESET
+}
