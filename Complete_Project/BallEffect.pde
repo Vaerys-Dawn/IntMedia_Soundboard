@@ -5,8 +5,9 @@ class BallEffect extends Effect { //<>//
   public BallEffect(String soundFile, int id, float offset, float effectWidth) throws IOException {
     super(soundFile, id, offset, effectWidth);
     for (int i = 0; i < 10; i++) {
-      balls.add(new BallObject(this, i+1));
+      balls.add(new BallObject(this, i+1, volume, context, sample));
     }
+    volume.removeAllConnections(sound);
   }
 
   public void drawEffect() {
@@ -17,5 +18,10 @@ class BallEffect extends Effect { //<>//
       if (b.state != State.RAIN_RESET) isOff = false;
     }
     if (isOff) volume.setGain(0);
+  }
+  
+  @Override
+  public void pause() {
+    isActive = false;
   }
 }

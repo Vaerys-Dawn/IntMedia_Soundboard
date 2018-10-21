@@ -33,7 +33,6 @@ class BubbleEffect extends Effect {
   }
   //EFFECT
   public void drawEffect() {
-    //clear()
     if (isActive) {
       stateR = StateBU.RISE; //If key is pressed, bubbles go up
     }

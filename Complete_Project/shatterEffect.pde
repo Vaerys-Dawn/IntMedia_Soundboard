@@ -1,14 +1,17 @@
-
-
 class ShatterEffect extends Effect {
+  
+  float x = width - width;
+  float y = height - height;
+  float w = 150;
+  float spdX = 5.0f, spdY = 5.0f, rotSpd = PI/150;  
+  float theta;
+
   public ShatterEffect(String soundFile, int id, float offset, float effectWidth) throws IOException{
     super(soundFile, id, offset, effectWidth);
   }
   
-  public void drawEffect(){
-  
+  public void drawEffect(){ 
   fill(200, 0, 200);
-  background(0);
   pushMatrix();
   translate(-x, -y);
   rotate(-theta);

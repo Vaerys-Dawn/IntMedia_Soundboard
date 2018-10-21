@@ -2,11 +2,20 @@ private class BallObject extends ShapeObject {
 
   int alpha = 0;
   int posStart;
+  boolean soundAdded;
+  SamplePlayer player;
+  Gain volume;
+  AudioContext context;
+  Sample sound;
 
-  public BallObject(Effect effect, int position) {
+  public BallObject(Effect effect, int position, Gain volume, AudioContext context, Sample sound) {
     super(-100, -40, 40, 40, height - 60);
     this.effect = effect;
     this.posStart = position;
+    this.volume = volume; 
+    this.context = context;
+    this.sound = sound;
+    volume.setGain(0.1);
     state = State.BALL_RESET;
   }
 
@@ -32,6 +41,12 @@ private class BallObject extends ShapeObject {
       case BALL_SQUISH:
         boolean reachedWidth = objWidth >= (startWidth + (startWidth / 2));
         boolean reachedHeight = objHeight <= startHeight / 2;
+        if (!soundAdded) {
+          player = new SamplePlayer(context, sound);
+          player.setKillOnEnd(true);
+          volume.addInput(player);
+          soundAdded = true;
+        }
         if (reachedHeight && reachedWidth) {
           state = State.BALL_BOUNCE_1;
         } else {
@@ -65,8 +80,10 @@ private class BallObject extends ShapeObject {
       case BALL_RESET:
         posX = random.nextInt((int) effect.effectWidth);
         posY = -posStart * (height / 10) - 60;
+        soundAdded = false;
         speed = 15;
         alpha = 255;
+        volume.removeAllConnections(player);
         if (effect.isActive) {
           state = State.BALL_INITIAL_DROP;
         }
