@@ -1,7 +1,7 @@
 class DropletObject extends ShapeObject {
 
   public DropletObject(Effect effect) {
-    super(-100, -100, 20, 20, (float) (height * 0.8 + random.nextInt((int) (height * 0.1))));
+    super(-100, -100, 20, 20, (float) ((height- effect.effectWidth) * 0.8 + random.nextInt((int) (height * 0.1)) ));
     this.effect = effect;
     state = State.RAIN_RESET;
   }

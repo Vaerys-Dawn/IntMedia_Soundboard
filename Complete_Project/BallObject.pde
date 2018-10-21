@@ -8,8 +8,8 @@ private class BallObject extends ShapeObject {
   AudioContext context;
   Sample sound;
 
-  public BallObject(Effect effect, int position, Gain volume, AudioContext context, Sample sound) {
-    super(-100, -40, 40, 40, height - 60);
+  public BallObject(Effect effect, int position, Gain volume, AudioContext context, Sample sound, float effectHeight) {
+    super(-100, -40, 40, 40, height - 80 - effectHeight);
     this.effect = effect;
     this.posStart = position;
     this.volume = volume; 

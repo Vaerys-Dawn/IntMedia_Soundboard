@@ -8,8 +8,11 @@ abstract class Effect{
   Sample sample = null;
   SamplePlayer sound = null;
   Gain volume;
+  int red;
+  int green;
+  int blue;
   
-  public Effect(String soundFile, int id, float offset, float effectWidth) throws IOException {
+  public Effect(String soundFile, int id, float offset, float effectWidth, int red, int green, int blue) throws IOException {
     this.id = id;
     this.offset = offset;
     this.effectWidth = effectWidth;
@@ -21,20 +24,25 @@ abstract class Effect{
     sound = new SamplePlayer(context, sample);
     sound.setLoopType(SamplePlayer.LoopType.LOOP_FORWARDS);
     volume.addInput(sound);
+    this.red = red;
+    this.green = green;
+    this.blue = blue;
   }
   
   public void drawThis(){
     pushMatrix();
     drawEffect();
     popMatrix();
+    noStroke();
+    fill(100);
+    rect(offset, height-effectWidth, effectWidth, effectWidth);
+    
     if (isActive) {
-      fill(0);
-      rect(offset, 0, effectWidth, effectWidth);
-      fill(255);
+      fill(red, green, blue);
     } else {
-      fill(0);
+      fill(200);
     }
-    text(key + "", (key == 0 ? 900 : (key - 1) * 100) + 50, 50);
+    text(id + "", offset + 50, height-effectWidth+50);
   }
   
   abstract void drawEffect();

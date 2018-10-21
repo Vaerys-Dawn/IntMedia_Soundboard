@@ -6,8 +6,8 @@ class ShatterEffect extends Effect {
   float spdX = 5.0f, spdY = 5.0f, rotSpd = PI/150;  
   float theta;
 
-  public ShatterEffect(String soundFile, int id, float offset, float effectWidth) throws IOException{
-    super(soundFile, id, offset, effectWidth);
+  public ShatterEffect(String soundFile, int id, float offset, float effectWidth, int red, int green, int blue) throws IOException{
+    super(soundFile, id, offset, effectWidth, red, green, blue);
   }
   
   public void drawEffect(){ 

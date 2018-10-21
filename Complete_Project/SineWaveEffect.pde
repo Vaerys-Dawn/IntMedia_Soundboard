@@ -14,8 +14,8 @@ class SineWaveEffect extends Effect {
   int distanceX;
   color color_1 = color(200, 100, 0);
   
-  public SineWaveEffect(String soundFile, int id, float offset, float effectWidth) throws IOException{
-    super(soundFile, id, offset, effectWidth);
+  public SineWaveEffect(String soundFile, int id, float offset, float effectWidth, int red, int green, int blue) throws IOException{
+    super(soundFile, id, offset, effectWidth, red, green, blue);
   }
   
   public void drawEffect(){

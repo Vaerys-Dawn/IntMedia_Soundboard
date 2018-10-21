@@ -23,8 +23,8 @@ class BubbleEffect extends Effect {
   float sp;
   float sz;
   color c;
-  public BubbleEffect(String soundFile, int id, float offset, float effectWidth) throws IOException{ 
-    super(soundFile, id, offset, effectWidth);
+  public BubbleEffect(String soundFile, int id, float offset, float effectWidth, int red, int green, int blue) throws IOException{ 
+    super(soundFile, id, offset, effectWidth, red, green, blue);
     x = random(100, 300);
     y = random(100, 700);
     sp = random(0.8, 4); // Speed of bubbles

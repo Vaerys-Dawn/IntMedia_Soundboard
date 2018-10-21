@@ -1,7 +1,7 @@
 class ZigZagEffect extends Effect{
 
-public ZigZagEffect(String soundFile, int id, float offset, float effectWidth) throws IOException{
-  super(soundFile, id, offset, effectWidth);
+public ZigZagEffect(String soundFile, int id, float offset, float effectWidth, int red, int green, int blue) throws IOException{
+  super(soundFile, id, offset, effectWidth, red, green, blue);
 }
   //values for initial position of ball
   float ballx = 0;

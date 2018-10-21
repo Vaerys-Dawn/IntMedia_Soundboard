@@ -1,17 +1,18 @@
-class FlameEffect extends Effect{
+class ParticleEffect extends Effect{
+  
   ParticleSystem ps;
-public FlameEffect(String soundFile, int id, float offset, float effectWidth, int red, int green, int blue) throws IOException{
-  super(soundFile, id, offset, effectWidth, red, green, blue);
-  ps = new ParticleSystem(new PVector(width/2, 50));
-}
+  
+  public ParticleEffect(String soundFile, int id, float offset, float effectWidth, int red, int green, int blue) throws IOException{
+    super(soundFile, id, offset, effectWidth,red,green,blue);
+    ps = new ParticleSystem(new PVector(effectWidth, 50));
+  }
     
- 
-public void drawEffect(){
-    translate(offset, 0);
+  public void drawEffect(){
+    translate(offset,0 );
     if (isActive){ps.addParticle();}
     ps.run();
-}
-
+  }
+  
 class ParticleSystem {
   ArrayList<Particle> particles;
   PVector origin;
@@ -36,20 +37,23 @@ class ParticleSystem {
   }
 }
 
-
-// A simple Particle class
-
 class Particle {
   PVector position;
   PVector velocity;
   PVector acceleration;
   float lifespan;
+  float x;
+  float y;
+  float yspeed;
+  float z;
 
   Particle(PVector l) {
     acceleration = new PVector(0, 0.05);
     velocity = new PVector(random(-1, 1), random(-2, 0));
-    position = l.copy();
-    lifespan = 255.0;
+    x  = random(effectWidth);
+    y  = random(-500, -50);
+    z  = random(0, 20);
+    lifespan = 255;
   }
 
   void run() {
@@ -57,19 +61,25 @@ class Particle {
     display();
   }
 
-  // Method to update position
   void update() {
     velocity.add(acceleration);
-    position.add(velocity);
-    lifespan -= 1.0;
+    y = y + yspeed;
+    float grav = map(z, 0, 20, 0, 0.2);
+    yspeed = yspeed + grav;
+
+    if (y > height) {
+      y = random(-50, -50);
+      yspeed = map(z, 0, 20, 4, 10);
+    }
+    lifespan -= 2;
   }
 
   // Method to display
   void display() {
-    stroke(255, 255, 51, 50);
+    stroke(0);
     strokeWeight(1);
-    fill(255, 51, 51);
-    ellipse(position.x, position.y, 8, 8);
+    fill(22,187,62,255);
+    ellipse(x, y, 8, 8);
   }
 
   // Is the particle still useful?

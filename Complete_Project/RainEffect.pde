@@ -2,8 +2,8 @@ class RainEffect extends Effect {
 
     List<DropletObject> droplets = new LinkedList<DropletObject>();
 
-    public RainEffect(String soundFile, int id, float offset, float effectWidth) throws IOException {
-        super(soundFile, id, offset, effectWidth);
+    public RainEffect(String soundFile, int id, float offset, float effectWidth, int red, int green, int blue) throws IOException {
+        super(soundFile, id, offset, effectWidth, red, green, blue);
         for (int i = 0; i < 50; i++) {
             droplets.add(new DropletObject(this));
         }

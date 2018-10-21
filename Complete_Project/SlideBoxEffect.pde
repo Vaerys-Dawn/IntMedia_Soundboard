@@ -16,8 +16,8 @@ class SlideBoxEffect extends Effect {
   float ys;
   color cs;
   float ss;
-  public SlideBoxEffect(String soundFile, int id, float offset, float effectWidth) throws IOException{ 
-    super(soundFile, id, offset, effectWidth);
+  public SlideBoxEffect(String soundFile, int id, float offset, float effectWidth, int red, int green, int blue) throws IOException{ 
+    super(soundFile, id, offset, effectWidth, red, green, blue);
     xs = 550;
     ys = 250;
     cs = color(255, 0, 255);
