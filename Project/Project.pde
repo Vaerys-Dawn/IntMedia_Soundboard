@@ -1,32 +1,33 @@
+// BASE CODE with INDIVIDUAL COMPONENT 
+
 import beads.*;
 import org.jaudiolibs.beads.*;
 
   AudioContext context;
   Gain mainVolume;
-  float x, y, w;
-  float spdX, spdY, rotSpd;
-  float theta;
-  shatterEffect shatter;
+  BubbleEffect bubbles;
+  SlideBoxEffect box;
   
   public void setup(){
-    size(300,300);
-    background(255);
-    x = width- width;
-    y = height - height;
-    w = 150;
-    spdX = 5.0f;
-    spdY = 5.0f;
-    rotSpd = PI/150;
-    try{
-      shatter = new shatterEffect("",1,0,100);
-    }catch(IOException e){}
     context = new AudioContext();
     mainVolume = new Gain(context, 1, 1f);
     context.out.addInput(mainVolume);
     context.start();
+    size(800, 400);
+    try {
+      bubbles = new BubbleEffect("Bubbles.mp3", 6, 0, 200); //Audio clip for animation, binded to key 6
+      box = new SlideBoxEffect("Slide.mp3", 9, 0, 200); //Audio clip for animation, binded to key 9
+    }
+    catch (IOException e) {}
   }
 
   public void draw(){
-    clear();
-    shatter.drawEffect();
+    bubbles.drawEffect();
+    box.drawEffect();
+    if (mousePressed) {
+      bubbles.play(); //Audio should play on mouse click
+    }
+    else {
+      bubbles.pause();
+    }
   }
