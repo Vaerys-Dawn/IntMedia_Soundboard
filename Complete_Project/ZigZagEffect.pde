@@ -7,31 +7,32 @@ public ZigZagEffect(String soundFile, int id, float offset, float effectWidth, i
   float ballx = 0;
   float bally = height;
   //change to adjust direction, speed
-  float moveballx = 0.5;
+  float moveballx = -10;
   float movebally = -10;
 
   public void drawEffect(){
     translate(offset, 0);
     fill(255, 255, 51);
     if(isActive){
-      ellipse(ballx, bally, 30, 30);
+      ellipse(ballx, bally, 15, 15);
     }
-    ballx = ballx + moveballx;
-    bally = bally + movebally;
+ 
+    ballx += moveballx;
+    bally += movebally;
     
     if(ballx > effectWidth){
-      ballx = 0;
+      //ballx = effectWidth;
       moveballx = -moveballx;
     } 
-    if(bally > height){
-      bally = height;
+    if(bally > height-effectWidth){
+      bally = height-effectWidth;
       movebally = -movebally;
     } 
     if(ballx < 0){
-      ballx = effectWidth;
+      //ballx = 0;
       moveballx = -moveballx;
     } 
-    if(bally < height){
+    if(bally < 0){
       bally = 0;
       movebally = -movebally;
     } 
