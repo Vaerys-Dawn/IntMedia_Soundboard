@@ -7,7 +7,7 @@ public ZigZagEffect(String soundFile, int id, float offset, float effectWidth, i
   float ballx = 0;
   float bally = height;
   //change to adjust direction, speed
-  float moveballx = 55.5;
+  float moveballx = 0.5;
   float movebally = -10;
 
   public void drawEffect(){
@@ -19,19 +19,19 @@ public ZigZagEffect(String soundFile, int id, float offset, float effectWidth, i
     ballx = ballx + moveballx;
     bally = bally + movebally;
     
-    if(ballx > 800){
-      ballx = 800;
+    if(ballx > effectWidth){
+      ballx = 0;
       moveballx = -moveballx;
     } 
     if(bally > height){
       bally = height;
       movebally = -movebally;
     } 
-    if(ballx < 400){
-      ballx = 400;
+    if(ballx < 0){
+      ballx = effectWidth;
       moveballx = -moveballx;
     } 
-    if(bally < 0){
+    if(bally < height){
       bally = 0;
       movebally = -movebally;
     } 

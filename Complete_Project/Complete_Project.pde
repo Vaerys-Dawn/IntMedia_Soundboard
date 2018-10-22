@@ -6,11 +6,16 @@ import java.util.Map;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.Random;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.*;
 
   AudioContext context;
   Gain mainVolume;
   Map<Integer, Effect> effects = new HashMap<Integer, Effect>();
   Random random = new Random();
+  boolean recording = false;
     
   public void settings() {
     size(1000, 800);
@@ -44,18 +49,64 @@ import java.util.Random;
   public void draw() {
     clear();
     background(0);
+    String record = "";
     for (Map.Entry<Integer, Effect> e : effects.entrySet()) {
       e.getValue().drawThis();
+      record += e.getValue().isActive ? "1" : "0";
     }
-    
+    record += "\r\n";
+    if (recording) {
+      fill(255,0,0);
+      ellipse(20, height-40, 20,20);
+      writeToFile("sound.txt",record,false);
+    }
   }
 
   public void keyPressed() {
     Effect object = effects.get(keyCode);
     if (object != null) object.play();
+    if (key == 'r') recording = !recording;
+    if (key == 'c') writeToFile("sound.txt","",true);
   }
 
   public void keyReleased() {
     Effect object = effects.get(keyCode);
     if (object != null) object.pause();
   }
+  
+  public void writeToFile(String file, String text, boolean overwrite) {
+    file = dataPath(file);
+    try {
+      if (!Files.exists(Paths.get(file))) {
+        Files.createFile(Paths.get(file));
+      }
+      if (overwrite) {
+        FileWriter fileWriter = new FileWriter(file, false);
+        fileWriter.write(text);
+        fileWriter.flush();
+        fileWriter.close();
+      } else {
+        FileWriter fileWriter = new FileWriter(file, true);
+        fileWriter.append("\n" + text);
+        fileWriter.flush();
+        fileWriter.close();
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public List<String> readFromFile(String file) {
+    file = dataPath(file);
+    try {
+      if (!Paths.get(file).toFile().exists()) {
+        Files.createFile(Paths.get(file));
+      }
+      List<String> fileContents;
+      fileContents = Files.readAllLines(Paths.get(file));
+      return fileContents;
+    } catch (IOException e) {
+      return null;
+    }
+  }
+  

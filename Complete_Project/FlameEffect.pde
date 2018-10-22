@@ -1,8 +1,8 @@
 class FlameEffect extends Effect{
   ParticleSystem ps;
 public FlameEffect(String soundFile, int id, float offset, float effectWidth, int red, int green, int blue) throws IOException{
-  super(soundFile, id, offset, effectWidth, red, green, blue);
-  ps = new ParticleSystem(new PVector(width/2, 50));
+  super(soundFile, id, offset, effectWidth, red, green,blue);
+  ps = new ParticleSystem(new PVector(effectWidth/2, 50));
 }
     
  
@@ -11,7 +11,6 @@ public void drawEffect(){
     if (isActive){ps.addParticle();}
     ps.run();
 }
-
 class ParticleSystem {
   ArrayList<Particle> particles;
   PVector origin;
@@ -62,6 +61,7 @@ class Particle {
     velocity.add(acceleration);
     position.add(velocity);
     lifespan -= 1.0;
+   
   }
 
   // Method to display
