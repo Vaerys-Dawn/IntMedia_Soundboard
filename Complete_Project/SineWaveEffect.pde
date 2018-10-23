@@ -21,21 +21,24 @@ class SineWaveEffect extends Effect {
   public void drawEffect(){
     noStroke();
     smooth();
-    //translate(0, offset);
+    translate(offset + 50, 0);
     distanceX = endX-startX;
     completeCycle = TWO_PI/float(distanceX);
     subCycle = (TWO_PI*5)/float(distanceX);
-    fill(color_1);
+    fill(0);
+    if(keyPressed && key == '2'){    
+      fill(color_1);
+    }
     posY = 200;
-    WaveSpeed = 0.001;
+    WaveSpeed = 0.0004;
     rotate(HALF_PI);
-    translate(0, -width);
+    //translate(0, -width);
   
     for (int i = 1; i<width; i+=step) {
       temps += (millis()%i)*WaveSpeed;
       variationY = sin(((i-startX)+temps)*completeCycle);
       variationY*=amplitude;
-      ellipse(i, (posY+variationY), 5, 5);
+      ellipse(i, (variationY), 5, 5);
     }  
   }
 }
