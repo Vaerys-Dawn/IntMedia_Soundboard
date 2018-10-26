@@ -35,7 +35,7 @@ import java.io.*;
     try {        
       effects.put(49, new FlameEffect("fire.mp3", 1, 0, effectWidth, 255, 51, 51));                                   // 1
       effects.put(50, new SineWaveEffect("sinewave.mp3", 2, increment += effectWidth, effectWidth, 200, 100, 0));     // 2
-      effects.put(51, new ZigZagEffect("bubble.mp3", 3, increment += effectWidth, effectWidth, 255, 255, 51));       // 3
+      effects.put(51, new ZigZagEffect("square.mp3", 3, increment += effectWidth, effectWidth, 255, 255, 51));       // 3
       effects.put(52, new ParticleEffect("wind.mp3", 4, increment += effectWidth, effectWidth, 22,187,62));           // 4
       effects.put(53, new ParticleEffect("wind.mp3", 5, increment += effectWidth, effectWidth, 22,187,62));           // 5
       effects.put(54, new BubbleEffect("bubble.mp3", 6, increment += effectWidth, effectWidth, 0, 255, 255));        // 6
@@ -67,6 +67,15 @@ import java.io.*;
     if (object != null) object.play();
     if (key == 'r') recording = !recording;
     if (key == 'c') writeToFile("sound.txt","",true);
+    if (key == 'p') {
+    List<String>lines = readFromFile("sound.txt");
+    int start = 49;
+    for (String s: lines){
+    item = effects.get(start);
+    item.doEffect;
+    start++;
+    }
+    };
   }
 
   public void keyReleased() {
