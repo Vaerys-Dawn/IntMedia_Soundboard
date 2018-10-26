@@ -10,7 +10,15 @@ class ShatterEffect extends Effect {
     super(soundFile, id, offset, effectWidth, red, green, blue);
   }
   
+  
   public void drawEffect(){ 
+    if(key == '0'){
+      drawTriangles();
+    }
+  }
+  
+  void drawTriangles() {
+  translate(offset, 0);
   fill(200, 0, 200);
   pushMatrix();
   translate(-x, -y);
