@@ -25,7 +25,7 @@ class SineWaveEffect extends Effect {
     distanceX = endX-startX;
     completeCycle = TWO_PI/float(distanceX);
     subCycle = (TWO_PI*5)/float(distanceX);
-    fill(0);
+    noFill();
     if(keyPressed && key == '2'){    
       fill(color_1);
     }
