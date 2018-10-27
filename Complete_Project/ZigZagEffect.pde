@@ -37,4 +37,11 @@ public ZigZagEffect(String soundFile, int id, float offset, float effectWidth, i
       movebally = -movebally;
     } 
   }
+  
+  @Override
+  public void play() {
+    isActive = true;
+    volume.setGain(0.05f);
+  }
+  
 }
