@@ -17,7 +17,8 @@ class ShatterEffect extends Effect {
   
   public void drawEffect(){ 
     if(keyPressed && key == '0'){
-      drawTriangles();                 
+      drawTriangles();           
+          
     }
   }
   
