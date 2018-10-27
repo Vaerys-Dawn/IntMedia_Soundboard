@@ -12,10 +12,21 @@ class ShatterEffect extends Effect {
   
   
   public void drawEffect(){ 
-    if(key == '0'){
+    if(keyPressed && key == '0'){
       drawTriangles();
       //noLoop();
     }
+  }
+  
+  public void pause() {
+    isActive = false;
+    volume.setGain(0);
+    x = width - width;
+    y = height- height;
+    spdX = 4.0f;
+    spdY = 4.0f;
+    rotSpd = PI/150;
+    theta = 0;
   }
   
   void drawTriangles() {
