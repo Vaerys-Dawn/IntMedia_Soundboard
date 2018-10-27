@@ -1,3 +1,4 @@
+import processing.sound.*;
 import beads.*;
 import org.jaudiolibs.beads.*;
 import java.awt.*;
