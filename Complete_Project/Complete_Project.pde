@@ -71,12 +71,13 @@ import java.io.*;
     List<String>lines = readFromFile("sound.txt");
     int start = 49;
     for (String s: lines){
-    item = effects.get(start);
-    item.doEffect;
+    Effect objects = effects.get(start);
+    objects.drawEffect();
     start++;
+      }
     }
     };
-  }
+  
 
   public void keyReleased() {
     Effect object = effects.get(keyCode);
