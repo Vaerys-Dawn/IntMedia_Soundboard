@@ -4,14 +4,7 @@
 // Sliding Box effect will trigger when user enters keypad button '9'.
 // Sound and animation will be executed on user interaction.
 
-enum StateSB {
-  RISE,
-  FALL,
-}
 class SlideBoxEffect extends Effect {
-  StateSB stateRSB = StateSB.RISE;
-  StateSB stateFSB = StateSB.FALL;
-  StateSB state = StateSB.RISE;
   float xs;
   float ys;
   color cs;
@@ -24,29 +17,39 @@ class SlideBoxEffect extends Effect {
     ss = 0.5; // Speed of box movement
   }
   public void drawEffect() {
-    //clear(); //Removes trail but also accidently removes bubble animation.
-    fill(cs);
-    rect(xs, ys, 100, 100);
-    if (isActive) {
-      stateRSB = StateSB.RISE; //If key is pressed, box rises
+    translate(250, 0);
+    if (keyPressed && key == '9') {
+      upeffect();
     }
     else {
-      stateFSB = StateSB.FALL; //If key is not pressed, box falls
+      downeffect();
     }
-    switch(state) {
-      case RISE: 
-        ys = ys - ss; // Position of box goes up
-        if (ys > height) {
-          ys = 0;
-        }
-        break;
-      case FALL:
-        ys = ys + ss; // Position of box goes down
-        if (ys > height) {
-          ys = 0;
-        }
-        break;
+    noFill();
+    if(keyPressed && key == '9'){
+      fill(cs);
     }
+    
+    rect(xs, ys, 100, 100);
   }
-  
+  public void upeffect() {
+    ys = ys - ss; // Position of box goes up
+    if (ys > height  || ys < 0) {
+        ys = 0;
+      }
+  }
+  public void downeffect() {
+   ys = ys + ss;
+   if (ys < height  || ys < 0) {
+        ys = 250;
+      } 
+  }
+  /*@Override
+  public void pause() {
+    isActive = false;
+    volume.setGain(0);
+    ys = ys + ss; // Position of box goes up
+    if (ys > height  || ys < 0) {
+        ys = 250;
+      }
+  }*/
 }
