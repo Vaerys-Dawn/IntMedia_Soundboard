@@ -16,6 +16,8 @@ import java.io.*;
   Map<Integer, Effect> effects = new HashMap<Integer, Effect>();
   Random random = new Random();
   boolean recording = false;
+  boolean playback = false;
+  List<String> playBackList = new LinkedList();
     
   public void settings() {
     size(1000, 800);
@@ -50,15 +52,38 @@ import java.io.*;
     clear();
     background(0);
     String record = "";
-    for (Map.Entry<Integer, Effect> e : effects.entrySet()) {
-      e.getValue().drawThis();
-      record += e.getValue().isActive ? "1" : "0";
-    }
-    record += "\r\n";
-    if (recording) {
-      fill(255,0,0);
-      ellipse(20, height-40, 20,20);
-      writeToFile("sound.txt",record,false);
+    if (playback) {
+      int start = 48;
+      if (playBackList.size() == 0) {
+        playback = false;
+        return;
+      }
+      for (String s: playBackList.get(0).split("")){
+        Effect object = effects.get(start);
+        if (object == null) {
+          break;
+        }
+        if (s.equals("1")) object.play();
+        else object.pause();
+        start++;
+      }
+      playBackList.remove(0);
+      for (Map.Entry<Integer, Effect> e : effects.entrySet()) {
+        e.getValue().drawThis();
+      }
+      fill(0,255,0);
+      triangle(20, height-20, 20, height-40, 40, height-30);
+    }else {
+      for (Map.Entry<Integer, Effect> e : effects.entrySet()) {
+        e.getValue().drawThis();
+        record += e.getValue().isActive ? "1" : "0";
+      }
+      record += "\r\n";
+      if (recording) {
+        fill(255,0,0);
+        ellipse(20, height-40, 20,20);
+        writeToFile("sound.txt",record,false);
+      }
     }
   }
 
@@ -68,15 +93,15 @@ import java.io.*;
     if (key == 'r') recording = !recording;
     if (key == 'c') writeToFile("sound.txt","",true);
     if (key == 'p') {
-    List<String>lines = readFromFile("sound.txt");
-    int start = 49;
-    for (String s: lines){
-    Effect objects = effects.get(start);
-    objects.drawEffect();
-    start++;
+      playback = !playback;
+      if (playback) playBackList = readFromFile("sound.txt");
+      else {
+        for (Map.Entry<Integer, Effect> e : effects.entrySet()) {
+          e.getValue().pause();
+        }
       }
     }
-    };
+  }
   
 
   public void keyReleased() {
