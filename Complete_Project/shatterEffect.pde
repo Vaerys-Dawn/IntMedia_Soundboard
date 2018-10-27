@@ -1,23 +1,23 @@
-class ShatterEffect extends Effect {
+public class ShatterEffect extends Effect {
   
-  float x = width - width;
-  float y = height - height;
+  float x = 0;
+  float y = 0;
   float w = 150;
   float spdX = 4.0f, spdY = 4.0f, rotSpd = PI/150;  
   float theta;
   
-  boolean soundAdded;
-  SamplePlayer player = new SamplePlayer(context, sample);
-  Sample sound;
+  boolean soundAdded = false;
+  SamplePlayer player;
 
   public ShatterEffect(String soundFile, int id, float offset, float effectWidth, int red, int green, int blue) throws IOException{
     super(soundFile, id, offset, effectWidth, red, green, blue);
+    player = new SamplePlayer(context, sample);
+    volume.removeAllConnections(sound);
   }
-  
   
   public void drawEffect(){ 
     if(keyPressed && key == '0'){
-      drawTriangles();                 
+      drawTriangles();           
     }
   }
   
@@ -30,10 +30,12 @@ class ShatterEffect extends Effect {
     spdY = 4.0f;
     rotSpd = PI/150;
     theta = 0;
+    soundAdded = false;
   }
   
   void drawTriangles() {
   if (!soundAdded) {
+    player = new SamplePlayer(context, sample);
     player.setKillOnEnd(true);
     volume.addInput(player);
     soundAdded = true;
@@ -178,6 +180,5 @@ class ShatterEffect extends Effect {
   vertex(100, 650);
   endShape();
   popMatrix();
-
   }
 }
