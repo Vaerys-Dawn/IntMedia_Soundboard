@@ -1,4 +1,4 @@
-class ShatterEffect extends Effect {
+public class ShatterEffect extends Effect {
   
   float x = width - width;
   float y = height - height;
@@ -10,13 +10,10 @@ class ShatterEffect extends Effect {
   SamplePlayer player;
   AudioContext context;
   Sample sound;
-  
-  String soundFile;
-  SoundFile file;
 
   public ShatterEffect(String soundFile, int id, float offset, float effectWidth, int red, int green, int blue) throws IOException{
     super(soundFile, id, offset, effectWidth, red, green, blue);
-    this.soundFile = soundFile;
+    player = new SamplePlayer(context, sample);
   }
   
   

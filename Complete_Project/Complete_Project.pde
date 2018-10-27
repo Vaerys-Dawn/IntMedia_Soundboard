@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.*;
 
-  AudioContext context;
+  AudioContext context = new AudioContext();
   Gain mainVolume;
   Map<Integer, Effect> effects = new HashMap<Integer, Effect>();
   Random random = new Random();
@@ -26,11 +26,9 @@ import java.io.*;
   //bouncy ball sound recieved from here: http://soundbible.com/1626-Ball-Bounce.html
 
   public void setup() {
-    context = new AudioContext();
     mainVolume = new Gain(context, 1, 1f);
     context.out.addInput(mainVolume);
     context.start();
-    float bottom = height-100;
     float effectWidth = width/10;
     float increment = 0;
     textSize(32);
