@@ -62,7 +62,7 @@ import java.io.*;
           break;
         }
         if (s.equals("1")) object.play();
-        else object.pause();
+        else if (s.equals("0")) object.pause();
         start++;
       }
       playBackList.remove(0);
